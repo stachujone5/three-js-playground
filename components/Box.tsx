@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
+import { Sparkles } from '@react-three/drei'
 
 export const Box = () => {
 	const mesh = useRef<THREE.Mesh>(null)
@@ -15,6 +16,7 @@ export const Box = () => {
 		<mesh ref={mesh}>
 			<boxBufferGeometry attach='geometry' args={[1, 1, 1]} />
 			<meshStandardMaterial attach='material' />
+			<Sparkles count={50} scale={2} size={10} speed={0.5} />
 		</mesh>
 	)
 }
