@@ -1,10 +1,16 @@
-import type { NextPage } from 'next'
+import { Canvas } from '@react-three/fiber'
+import { Box } from '../components/Box'
+import { CanvasContainer } from '../components/styles/CanvasContainer.styled'
+import { Stars } from '@react-three/drei'
 
-const Home: NextPage = () => {
+const Home = () => {
 	return (
-		<div>
-			<h1>X</h1>
-		</div>
+		<CanvasContainer>
+			<Canvas>
+				<Stars />
+				<Box />
+			</Canvas>
+		</CanvasContainer>
 	)
 }
 
