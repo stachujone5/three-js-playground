@@ -1,22 +1,27 @@
-import * as THREE from 'three'
+import type { Mesh } from 'three'
 import { useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
-import { Sparkles } from '@react-three/drei'
+import { useRef, useState } from 'react'
 
-export const Box = () => {
-	const mesh = useRef<THREE.Mesh>(null)
+interface Props {
+	position?: [x: number, y: number, z: number]
+	index: number
+}
+
+export const Box = ({ position, index }: Props) => {
+	const [active, setActive] = useState(false)
+	const mesh = useRef<Mesh>(null)
 
 	useFrame(() => {
 		if (mesh.current) {
-			mesh.current.rotation.x = mesh.current.rotation.y += 0.02
+			mesh.current.rotation.x += Math.random() * 0.02
+			mesh.current.rotation.y += Math.random() * 0.01
 		}
 	})
 
 	return (
-		<mesh ref={mesh}>
-			<boxBufferGeometry attach='geometry' args={[1, 1, 1]} />
-			<meshStandardMaterial attach='material' />
-			<Sparkles count={50} scale={2} size={10} speed={0.5} />
+		<mesh ref={mesh} position={position} onPointerEnter={() => setActive(true)} onPointerLeave={() => setActive(false)}>
+			<boxBufferGeometry args={[1, 1, 1]} />
+			<meshStandardMaterial color={active ? 'rgb(17, 43, 60)' : 'rgb(32, 83, 117)'} />
 		</mesh>
 	)
 }
